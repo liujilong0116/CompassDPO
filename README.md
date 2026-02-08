@@ -25,8 +25,8 @@ wDPO needs no extra reward model and does not filter data.
 ### 1) Create a clean Conda environment
 
 ```bash
-conda create -n shapo python=3.10 -y
-conda activate shapo
+conda create -n wdpo python=3.10 -y
+conda activate wdpo
 ```
 
 ### 2) Install PyTorch (choose your CUDA / CPU build)
@@ -71,18 +71,16 @@ pip install -r requirements.txt
 
 ### 1) Qwen3-8B-Base SFT (supervised fine-tuning)
 
-Baseline SFT run (Hydra-style arguments).
+Baseline SFT run
 
 ```bash
 python train.py   model=llama38b   datasets=[pku_30k_harmless]   loss=sft   exp_name=LLaMA3-8B-SFT   gradient_accumulation_steps=2   batch_size=64   eval_batch_size=32   trainer=FSDPTrainer   sample_during_eval=false   model.fsdp_policy_mp=bfloat16
 ```
 
-### 2) LLaMA3-8B wDPO\*\*
-
-Token-level ShaPO combines DPO with SAM-style perturbations on the identified subspace.
+### 2) LLaMA3-8B wDPO
 
 ```bash
-CUDA_VISIBLE_DEVICES=0,1 python -u train_wDPO.py model=llama38b datasets=[pku_30k_harmless] loss=dpo loss.beta=0.1 exp_name=llama38_DrShaPO_pku_30k_harmless gradient_accumulation_steps=2 batch_size=32 eval_batch_size=32 trainer=FSDPTrainer sample_during_eval=false model.fsdp_policy_mp=bfloat16 model.archive=/home/y/yangyh/ljl/ShaPO/.cache/yangyh/llama38_pku_30k_harmless_sft_2026-01-01_23-20-03_192292/LATEST/policy.pt loss.name2=dpo warmup_steps=10 max_grad_norm=10 n_eval_examples=256 eval_every=2048 reward_beta=10 harmless_rate=0.2 interval_for_shapo=5 same_steps=true if_output=false if_save=true
+CUDA_VISIBLE_DEVICES=0,1 python -u train_wDPO.py model=llama38b datasets=[pku_30k_harmless] loss=dpo loss.beta=0.1 exp_name=llama38_wDPO_pku_30k_harmless gradient_accumulation_steps=2 batch_size=32 eval_batch_size=32 trainer=FSDPTrainer sample_during_eval=false model.fsdp_policy_mp=bfloat16 model.archive=/xxx/llama38_pku_30k_harmless_sft_2026-01-01_23-20-03_192292/LATEST/policy.pt loss.name2=dpo warmup_steps=10 max_grad_norm=10 n_eval_examples=256 eval_every=2048 reward_beta=10 harmless_rate=0.2 same_steps=true if_output=false if_save=true
 ```
 
 ---
@@ -99,7 +97,7 @@ CUDA_VISIBLE_DEVICES=0,1 python -u train_wDPO.py model=llama38b datasets=[pku_30
 
 - 🧮 **Precision**: `bfloat16` works well with FSDP; adjust for your hardware.
 - 🧵 **FSDP**: Ensure PyTorch build and NCCL are compatible; set `NCCL_P2P_DISABLE=1` if you hit P2P issues.
-- 💾 **Checkpoints**: `model.archive` should point to your SFT checkpoint (`.pt`) before launching ShaPO runs.
+- 💾 **Checkpoints**: `model.archive` should point to your SFT checkpoint (`.pt`) before launching wDPO runs.
 - 🧪 **Eval cadence**: Tune `eval_every` and `n_eval_examples` for your compute budget.
 
 ---

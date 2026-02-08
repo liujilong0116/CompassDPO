@@ -1,0 +1,9 @@
+# config/model/qwen3-8b.yaml
+# 基于 HuggingFace Transformers 的 Qwen 3-8B 模型配置
+name_or_path: /mnt/scratch/y/yangyh/models/Qwen/Qwen3-4B
+tokenizer_name_or_path: /mnt/scratch/y/yangyh/models/Qwen/Qwen3-4B
+archive: null
+block_name: Qwen3DecoderLayer  # 这个需要看你的代码里 Qwen 模型对应的 block 类名
+policy_dtype: float32
+fsdp_policy_mp: null
+reference_dtype: float16

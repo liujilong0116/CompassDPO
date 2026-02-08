@@ -1,0 +1,9 @@
+name_or_path: /mnt/scratch/y/yangyh/models/EleutherAI/pythia-2.8b
+# name_or_path: /root/autodl-tmp/huggingface/cache/hub/models--EleutherAI--pythia-2.8b/snapshots/2a259cdd96a4beb1cdf467512e3904197345f6a9
+tokenizer_name_or_path: null
+archive: null
+block_name: GPTNeoXLayer
+
+policy_dtype: float32
+fsdp_policy_mp: null
+reference_dtype: float16

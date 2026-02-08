@@ -1,0 +1,9 @@
+name_or_path: /root/autodl-tmp/models/Qwen/Qwen2-VL-2B
+tokenizer_name_or_path: /root/autodl-tmp/models/Qwen/Qwen2-VL-2B
+# name_or_path: /root/autodl-tmp/models/Qwen/Qwen2-VL-2B-Instruct
+# tokenizer_name_or_path: /root/autodl-tmp/models/Qwen/Qwen2-VL-2B-Instruct
+archive: null
+block_name: Qwen2VLDecoderLayer  # 这个需要看你的代码里 Qwen 模型对应的 block 类名
+policy_dtype: float32
+fsdp_policy_mp: null
+reference_dtype: float16

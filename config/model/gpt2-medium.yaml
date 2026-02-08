@@ -1,0 +1,10 @@
+name_or_path: /root/autodl-tmp/models/openai-community/gpt2-medium
+# name_or_path: /root/autodl-tmp/twj/model/injected_noise/gpt2-medium-afterDrDPO-noised0.1_fix
+
+tokenizer_name_or_path: /root/autodl-tmp/models/openai-community/gpt2-medium
+archive: null
+block_name: GPT2Block
+
+policy_dtype: float32
+fsdp_policy_mp: null
+reference_dtype: float16

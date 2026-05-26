@@ -8,7 +8,7 @@ import hydra
 import torch.multiprocessing as mp
 from omegaconf import OmegaConf, DictConfig
 # import trainers
-import trainers_wDPO as trainers
+import trainers_CompassDPO as trainers
 import wandb
 import json
 import socket
